@@ -1,0 +1,15 @@
+# Active le module de réécriture d'URL (mod_rewrite) d'Apache
+
+RewriteEngine On
+
+# Condition de réécriture : vérifie si la requête ne correspond pas à un fichier physique existant
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# La règle de réécriture : redirige toutes les requêtes vers public/index.php
+# ^(.*)$ correspond à toute l'url après le nom de domaine
+# [QSA,L] : QSA signifie "append query string et L signifie "last"
+# QSA permet de conserver les paramètres d'origine lors de la redirection
+# L indique que c'est la dernière règle de réécriture à appliquer
+
+RewriteRule ^(.*)$  public/index.php?url=$1 [QSA,L]
